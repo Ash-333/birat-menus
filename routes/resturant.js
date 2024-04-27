@@ -7,7 +7,6 @@ const cloudinary=require('../utils/cloudinaryConfig')
 const upload=require('../utils/uploader')
 
 router.post('/restaurant',upload.single('image'), async (req, res) => {
-    console.log(req.body)
     try {
         const result=await cloudinary.uploader.upload(req.file.path, {
             folder: "restaurantImg",
