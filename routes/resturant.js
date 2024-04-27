@@ -8,15 +8,12 @@ const upload=require('../utils/uploader')
 
 router.post('/restaurant',upload.single('image'), async (req, res) => {
     try {
-        const result=await cloudinary.uploader.upload(req.file.path, {
-            folder: "restaurantImg",
-          });
-          fs.unlinkSync(req.file.path)
+        const imgURl=req.file.path
         const newRestaurant = new Restaurant({
             name:req.body.name,
             address:req.body.address,
             intro:req.body.intro,
-            image:result.secure_url
+            image:imgURl
         });
         const restaurant = await newRestaurant.save();
         res.status(200).json(restaurant);
